@@ -1,0 +1,23 @@
+{
+  "name": "streamical/music_importer",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Benjamin Schneider",
+      "email": "benny@streamical.de"
+    }
+  ],
+  "require": {
+    "mongodb/mongodb": "^1.8",
+    "php-ffmpeg/php-ffmpeg": "^0.17.0",
+    "duncan3dc/meta-audio": "^0.6.0",
+    "ext-mongo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Streamical\\MusicImporter\\": "src/"
+    }
+  }
+}
