@@ -1,5 +1,13 @@
 <?php
-
+/*
+ *
+ *  Project: MusicImporter
+ *  File: Database.php
+ *  Last modified: 2/28/21, 12:21 AM
+ *  By: javik
+ *  * Copyright (c) 2021 Schneider, Benjamin & Wolfhard, Elias GbR
+ *
+ */
 
 namespace Streamical\MusicImporter;
 
