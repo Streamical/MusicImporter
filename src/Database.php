@@ -11,21 +11,62 @@
 
 namespace Streamical\MusicImporter;
 
+use MongoDB\BSON\ObjectId;
 
-use function MongoDB\Client;
-
-class Database extends MusicImporter
+class Database
 {
-    private \MongoDB $mongo;
+    private ?\MongoDB\Client $moClient;
+    private $database;
     
-    // mongodb://s:s@localhost:27017/?authSource=admin&readPreference=primary&ssl=false
-    public function __construct(string $hostname, string $username, string $password, string $authSource, int $port) {
-        $this->mongo = Client(
-            'mongodb+srv://<username>:<password>@<cluster-address>/test?retryWrites=true&w=majority'
-        );
+    public function __construct(string $hostname = null,
+                                string $username = null,
+                                string $password = null,
+                                string $database = null,
+                                int $port = 27017)
+    {
+        if ( $hostname != null && $username != null && $password != null && $database != null )
+            $this->connect( $hostname, $username, $password, $database, $port );
+        
     }
     
-    public function open() {
-    
+    /**
+     *
+     */
+    public function __destruct()
+    {
+        $this->disconnect();
     }
+    
+    
+    public function connect(string $hostname,
+                            string $username,
+                            string $password,
+                            string $database,
+                            int $port = 27017) :void
+    {
+        
+        try {
+            $this->moClient = new \MongoDB\Client(
+                "mongodb://$username:$password@$hostname/$database?retryWrites=true&w=majority"
+            );
+    
+            $this->database = $this->moClient->$database;
+        } catch (\MongoDB\Driver\Exception\AuthenticationException $e) {
+            die ($e->getMessage());
+        }
+    }
+    
+    public function disconnect() :void {
+        $this->moClient = null;
+    }
+    
+    public function insert(string $collection, array $data) :int|ObjectId {
+        try {
+            $result = $this->database->$collection->insertOne($data);
+            return ($result->getInsertedId());
+        } catch (\MongoDB\Driver\Exception\AuthenticationException $e) {
+            die ($e->getMessage());
+        }
+    }
+
 }

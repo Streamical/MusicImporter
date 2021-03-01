@@ -14,9 +14,10 @@ $config = [
         "username"   => "",
         "password"   => "",
         "port"       => 0,
-        "authSource" => "",
-        "hostname"   => ""
+        "hostname"   => "",
+        "database"   => ""
     ],
-    "path" => ""
+    "path" => "",
+    "installPath" => ""
 ];
 

@@ -12,7 +12,8 @@
   "require": {
     "mongodb/mongodb": "^1.8",
     "php-ffmpeg/php-ffmpeg": "^0.17.0",
-    "duncan3dc/meta-audio": "^0.6.0"
+    "duncan3dc/meta-audio": "^0.6.0",
+    "ext-mongodb": "*"
   },
   "autoload": {
     "psr-4": {

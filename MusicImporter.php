@@ -18,7 +18,7 @@ use Streamical\MusicImporter;
 
 global $config;
 
-$metadata = new MusicImporter\Metadata();
+/*$metadata = new MusicImporter\Metadata();
 $metadata->openSong("/home/javik/Desktop/Music/CC0 1.0 Universal/Loyalty Freak Music/TO CHILL AND STAY AWAKE/01 Loyalty Freak Music - Coexistenz.mp3");
 
 $musicimporter = new MusicImporter\MusicImporter();
@@ -26,4 +26,14 @@ $mediaFiles = $musicimporter->scanDirForMediaFiles($config["path"]);
 
 $musicimporter->bulkCreateLicenceTxt($mediaFiles);
 $musicimporter->bulkCreateSourceTxt($mediaFiles);
-$musicimporter->bulkCreateGenreTxt($mediaFiles);
+$musicimporter->bulkCreateGenreTxt($mediaFiles);*/
+
+$database = new MusicImporter\Database();
+
+$database->connect($config["database"]["hostname"],
+    $config["database"]["username"],
+    $config["database"]["password"],
+    $config["database"]["database"],
+    $config["database"]["port"]);
+
+$database->insert("songs", array ("Test" => "Test1"));
